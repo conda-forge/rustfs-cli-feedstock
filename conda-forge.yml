@@ -12,3 +12,5 @@ test: native_and_emulated
 build_platform:
   win_arm64: win_64
 conda_install_tool: pixi
+bot:
+  automerge: true
