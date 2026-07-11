@@ -1,5 +1,5 @@
 context:
-  version: "0.1.25"
+  version: "0.1.26"
 
 package:
   name: rustfs-cli
@@ -7,12 +7,15 @@ package:
 
 source:
   url: https://github.com/rustfs/cli/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 28e2a86adb30bf18feac511d6f9ac019808b2fc01768538332c83ddf55c5f92c
+  sha256: f9e3a6b10983b1c45030a4ef3b0e0c7760ed0c7365683a95d5a2a6e9b09d5268
 
 build:
   number: 0
   script:
     env:
+      # Use cmake to build aws-lc-sys, because conda's CFLAGS inject -O2 which
+      # overrides the -O0 required by jitterentropy-base.c, causing a build failure.
+      AWS_LC_SYS_CMAKE_BUILDER: "1"
       CARGO_PROFILE_RELEASE_STRIP: symbols
       CARGO_PROFILE_RELEASE_LTO: fat
     content:
@@ -30,6 +33,8 @@ requirements:
     - ${{ compiler('rust') }}
     - cargo-bundle-licenses
     - cargo-auditable
+    - cmake
+    - make
 
 tests:
   - script: rc --help
