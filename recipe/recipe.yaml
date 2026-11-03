@@ -1,5 +1,5 @@
 context:
-  version: "0.1.36"
+  version: "0.1.37"
 
 package:
   name: rustfs-cli
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/rustfs/cli/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: b48a2161452a078f1629e43c5c17a0e5a03deec8fde22ae4972e51166ed591dc
+  sha256: 365638c9fad6b675f7e6201031ba716a1f9b1f891af1998cc26de762be91af7a
 
 build:
-  number: 1
+  number: 0
   script:
     env:
       # Use cmake to build aws-lc-sys, because conda's CFLAGS inject -O2 which
